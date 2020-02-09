@@ -1,0 +1,16 @@
+<sdf version='1.6'>
+  <world name='default'>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <plugin name="gazebo_model_destroyer_plugin" filename="libgazebo_model_destroyer_plugin.so">
+      <destroyService>gazebo/destroy_model</destroyService>
+      <linearVel>7</linearVel>
+      <angularVel>3</angularVel>
+    </plugin>
+  </world>
+</sdf>

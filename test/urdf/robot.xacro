@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <link name="base_footprint" />
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="10" />
+      <inertia ixx="1e-1"  ixy="0"  ixz="0" iyy="1e-1" iyz="0" izz="1e-1" />
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.5 0.35 0.2" />
+      </geometry>
+      <material name="red">
+        <color rgba="0.8 0.0 0.0 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.5 0.35 0.2" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base" type="fixed">
+    <parent link="base_footprint" />
+    <child link="base_link" />
+    <origin xyz="0 0 0.15" />
+  </joint>
+
+  <xacro:macro name="wheel" params="prefix xreflect yreflect">
+    <link name="${prefix}_wheel_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="1" />
+        <inertia ixx="1e-3"  ixy="0"  ixz="0" iyy="1e-3" iyz="0" izz="1e-3" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+        <geometry>
+          <cylinder length="0.05" radius="0.06" />
+        </geometry>
+        <material name="gray">
+          <color rgba="0.35 0.35 0.35 1.0" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+        <geometry>
+          <cylinder length="0.05" radius="0.06" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}_wheel" type="continuous">
+      <parent link="base_link" />
+      <child link="${prefix}_wheel_link" />
+      <origin xyz="${xreflect*0.15} ${yreflect*0.21} -0.08" />
+      <axis xyz="0 -1 0" />
+    </joint>
+  </xacro:macro>
+
+  <xacro:wheel prefix="front_left" xreflect="1" yreflect="1" />
+  <xacro:wheel prefix="front_right" xreflect="1" yreflect="-1" />
+  <xacro:wheel prefix="rear_left" xreflect="-1" yreflect="1" />
+  <xacro:wheel prefix="rear_right" xreflect="-1" yreflect="-1" />
+
+</robot>

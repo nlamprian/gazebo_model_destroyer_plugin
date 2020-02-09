@@ -1,0 +1,9 @@
+<launch>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find gazebo_model_destroyer_plugin)/test/worlds/example.world" />
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro '$(find gazebo_model_destroyer_plugin)/test/urdf/robot.xacro'" />
+
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model robot -param robot_description" />
+</launch>
