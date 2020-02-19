@@ -73,7 +73,11 @@ ignition::math::Vector3d GazeboModelDestroyerPlugin::getRandomVel(
 bool GazeboModelDestroyerPlugin::destroyServiceCallback(
     gazebo_model_destroyer_plugin::DestroyRequest& req,
     gazebo_model_destroyer_plugin::DestroyResponse& res) {
+#if GAZEBO_MAJOR_VERSION > 7
   auto model = world_->ModelByName(req.model_name);
+#else
+  auto model = world_->GetModel(req.model_name);
+#endif
   if (model == nullptr) {
     ROS_WARN_STREAM_NAMED(
         "model_destroyer",
