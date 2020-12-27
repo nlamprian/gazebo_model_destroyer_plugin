@@ -1,12 +1,12 @@
 gazebo_model_destroyer_plugin
----
+=============================
 
 A gazebo world plugin that exposes a ROS service for destroying a model.
 
-![demo](assets/example.gif)
+![demo](https://github.com/nlamprian/gazebo_model_destroyer_plugin/wiki/assets/example.gif)
 
 Usage
----
+-----
 
 Add the following configuration in the world
 
